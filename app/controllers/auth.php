@@ -36,17 +36,17 @@ class Auth extends Controller{
 
             if(!$auth){
 
-                echo 0;
+                $result=0;
+
+                echo json_encode($result);
                 exit();
-
-                // $data["em"]="Ce compte n’existe pas";
-
-                // $this->view('signinPage',$data);
 
 
             }else{
 
-                echo 1;
+                $result=1;
+
+                echo json_encode($result);
                 exit();
 
 

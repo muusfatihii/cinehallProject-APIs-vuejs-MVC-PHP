@@ -11,7 +11,7 @@ class ShowRepo
     public function getfilteredShows($idMovie){
 
         $statement = $this->dbconnection->getConnection()->prepare(
-            "SELECT `room`,`dateShow` FROM `show` WHERE `movie`=? AND `dateShow`>=NOW()"
+            "SELECT `id`,`idRoom`,`showDate` FROM `session` WHERE `idMovie`=? AND `showDate`>=NOW() ORDER BY showDate"
         );
 
         $statement->execute([$idMovie]);

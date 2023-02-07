@@ -14,6 +14,13 @@ class Movie extends Controller{
 
     public function all($params=[]){
 
+        header('Access-Control-Allow-Origin: *');
+        header('Content-Type: application/json');
+        header('Access-Control-Allow-Method: *');
+        header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorisation');
+        
+
+
 
         $movieRepo = $this->model('MovieRepo');
 
@@ -21,7 +28,18 @@ class Movie extends Controller{
 
         $movieRepo->dbconnection =  $dbconnection;
 
-        $movies  = $movieRepo->getMovies();
+        $results  = $movieRepo->getMovies();
+        
+        $movies = [];
+
+        for($i=0;$i<count($results);$i++){
+
+            $movie = new Movie();
+            $movie->id = $results[$i]['id'];
+            $movie->name = $results[$i]['name'];
+
+            $movies [] = $movie;
+        }
 
         echo json_encode($movies);
 
