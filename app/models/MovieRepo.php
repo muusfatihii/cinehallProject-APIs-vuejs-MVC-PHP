@@ -24,5 +24,21 @@ class MovieRepo
     }
 
 
+    public function getMovieName($idMovie)
+    {
+
+        $statement = $this->dbconnection->getConnection()->prepare(
+            "SELECT `name` as nameMovie FROM `movie` WHERE `id`=?"
+        );
+
+        $statement->execute([$idMovie]);
+
+        $row = $statement->fetch();
+
+        return $row['nameMovie'];
+
+    }
+
+
 
 }

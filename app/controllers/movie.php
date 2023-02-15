@@ -35,7 +35,7 @@ class Movie extends Controller{
         for($i=0;$i<count($results);$i++){
 
             $movie = new Movie();
-            $movie->id = $results[$i]['id'];
+            $movie->id = 'M'.$results[$i]['id'];
             $movie->name = $results[$i]['name'];
 
             $movies [] = $movie;

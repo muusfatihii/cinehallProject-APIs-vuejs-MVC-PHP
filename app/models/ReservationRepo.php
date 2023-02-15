@@ -64,6 +64,19 @@ class ReservationRepo
 
     }
 
+    public function cancelReservation($idRes){
+
+        $statement = $this->dbconnection->getConnection()->prepare(
+            "DELETE FROM `reservation` WHERE id=?"
+        );
+
+        $affectedLines = $statement->execute([$idRes]);
+
+
+        return ($affectedLines>0);
+
+    }
+
 
 
 }

@@ -11,13 +11,9 @@ class Show extends Controller
         header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorisation');
         
 
-        $idMovie = $_POST['idMovie'];
+        $idMovie = (int) substr($_POST['idMovie'],1);
 
-
-        // $idMovie = 1;
-
-
-
+    
 
         $showRepo = $this->model('ShowRepo');
 
@@ -28,6 +24,14 @@ class Show extends Controller
 
         $shows  = $showRepo->getfilteredShows($idMovie);
 
+        if(count($shows)==0){
+
+            echo json_encode([]);
+
+            exit();
+
+
+        }
 
 
         $reservationRepo = $this->model('ReservationRepo');
@@ -50,8 +54,10 @@ class Show extends Controller
         
         for($i=0;$i<count($shows);$i++){
 
-            $reservedSeats  = $reservationRepo->getReservedSeats($shows[$i]['idRoom'],$shows[$i]['showDate']);
             $showdet = new Show();
+
+            $reservedSeats  = $reservationRepo->getReservedSeats($shows[$i]['idRoom'],$shows[$i]['showDate']);
+            
             $showdet->id = $shows[$i]['id'];
             $showdet->showDate = $shows[$i]['showDate'];
             $showdet->idRoom = $shows[$i]['idRoom'];

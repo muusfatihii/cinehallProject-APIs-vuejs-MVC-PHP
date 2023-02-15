@@ -114,12 +114,13 @@ class Auth extends Controller{
             } else {
 
 
-                echo $ref;
-                exit();
-
-
-
+                // echo $ref;
+                // exit();
                 // header ('Location: /cinehall/public/page/signin');
+
+
+
+                
 
             }
 
